@@ -1,5 +1,6 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
+import { CiCalculator2 } from "react-icons/ci";
 
 export default function Header2() {
   const [width, setWidth] = useState("")
@@ -7,6 +8,8 @@ export default function Header2() {
   const [depth, setDepth] = useState("")
   const [result, setResult] = useState("")
   const [open, setOpen] = useState(false)
+
+  const popoverRef = useRef<HTMLDivElement | null>(null)
 
   const handleCount = () => {
     const w = parseFloat(width) || 0
@@ -22,19 +25,48 @@ export default function Header2() {
     setResult("")
   }
 
+  // ✅ إغلاق عند النقر خارج الديف
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside)
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [open])
+
   return (
     <div className="p-4 relative">
       {/* زر فتح البوبوفر */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="px-4 py-2 text-yellow-400 border-yellow-400 border-2 hover:text-white hover:bg-yellow-500 rounded-md"
-      >
-        Calculate shipping cost
-      </button>
+      <div className="relative inline-block group">
+        <button
+          onClick={() => setOpen(!open)}
+          className="text-gray-500 text-3xl hover:text-yellow-600 border border-amber-100 p-2 rounded-full"
+        >
+          <CiCalculator2 />
+        </button>
+
+        {/* النص يظهر عند hover */}
+        <span className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block bg-yellow-500 text-white text-sm px-2 py-1 rounded shadow-lg whitespace-nowrap">
+          احسب تكلفة الشحن
+        </span>
+      </div>
 
       {/* البوبوفر */}
       {open && (
-        <div className="absolute top-full mt-2 w-72 bg-white border rounded shadow-lg p-4 z-10">
+        <div
+          ref={popoverRef}
+          className="absolute top-full mt-2 w-72 bg-white border rounded shadow-lg p-4 z-10"
+        >
           {/* زر الإغلاق */}
           <button
             onClick={() => setOpen(false)}

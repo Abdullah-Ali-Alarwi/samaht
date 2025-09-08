@@ -9,8 +9,7 @@ import ResetPasswordForm from './ResetPasswordForm'
 export default function page() {
   return (
 
-<div className="w-screen h-screen bg-[url('/image/loginCartimage.jpg')] bg-cover   ">   
-
+<div className="w-screen h-screen  flex justify-center items-center bg-amber-700/5 p-10   ">   
 
 
 <div className='bg-white w-[50%] min-h-screen  p-10 flex flex-col items-center justify-center'>

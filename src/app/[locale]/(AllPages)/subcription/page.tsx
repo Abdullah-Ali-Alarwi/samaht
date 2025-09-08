@@ -3,11 +3,12 @@ import { FaCheck } from 'react-icons/fa'
 
 export default function page() {
   return (
-    <div className='m-10'>
+    <div className=' flex justify-center items-center'>
+      <div>
       <h1 className='text-[24px] m-10 text-yellow-500'>الاشتراكات </h1>
 
-      <div className='flex justify-around  flex-col lg:flex-row gap-10 w-[90%] m-auto'>
-        <div className=' flex flex-col  justify-around items-center border-1 border-gray-300 rounded-md w-[370px] h-[550px] p-7'>
+      <div className='flex justify-around  flex-col lg:flex-row gap-10 w-[100%] m-auto'>
+        <div className=' flex flex-col  justify-around items-center border-1 border-gray-300 rounded-md m-auto w-[330px] h-[550px] p-7'>
             <h1 className='text-[24px]'>باقة التاجر</h1>
             <p className='text-[16px] text-[#828282]'>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه بروشور او فلاير.</p>
             <div>
@@ -23,7 +24,7 @@ export default function page() {
                     <button className='bg-yellow-500 text-white p-2 rounded-md w-full hover:bg-white hover:text-yellow-500  border-1 border-yellow-500'>الاشتراكات في هنا</button>
 
         </div>
-        <div className=' flex flex-col bg-yellow-100/30  justify-around items-center border-1 border-gray-300 rounded-md w-[370px] h-[550px] p-7'>
+        <div className=' flex flex-col bg-yellow-100/30  justify-around items-center border-1 border-gray-300 rounded-md m-auto w-[330px] h-[550px] p-7'>
             <h1 className='text-[24px]'> الباقة الذهبية</h1>
             <p className='text-[16px] text-[#828282]'>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه بروشور او فلاير.</p>
             <div>
@@ -39,7 +40,7 @@ export default function page() {
                     <button className=' text-yellow-500 bg-white hover:text-white hover:bg-yellow-500 border-yellow-500 border-1 p-2 rounded-md w-full'>الاشتراكات في هنا</button>
 
         </div>
-        <div className=' flex flex-col  justify-around items-center border-1 border-gray-300 rounded-md w-[370px] h-[550px] p-7'>
+        <div className=' flex flex-col  justify-around items-center border-1 border-gray-300 rounded-md m-auto w-[330px] h-[550px] p-7'>
             <h1 className='text-[24px]'>الباقة المجانية </h1>
             <p className='text-[16px] text-[#828282]'>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه بروشور او فلاير.</p>
             <div>
@@ -57,6 +58,7 @@ export default function page() {
         </div>
 
       </div>
+    </div>
     </div>
   )
 }

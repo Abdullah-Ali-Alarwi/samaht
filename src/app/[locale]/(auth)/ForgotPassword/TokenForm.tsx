@@ -68,7 +68,7 @@ export default function TokenForm({ token, setToken, disable, onSubmit }: Props)
     <div className="w-full flex flex-col gap-4 mb-6 border-b-2 border-yellow-300 p-3">
       <p>لكي تتمكن من تغيير كلمة السر يجب إدخال رمز التحقق عبر البريد</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="flex justify-between gap-2">
+        <div className="flex justify-between flex-wrap gap-1">
           {otp.map((digit, index) => (
             <input
               key={index}
@@ -80,7 +80,7 @@ export default function TokenForm({ token, setToken, disable, onSubmit }: Props)
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={handlePaste}
               disabled={disable}
-              className={`w-12 h-12 text-center border rounded-lg text-xl font-bold focus:ring-2 focus:ring-yellow-400 ${
+              className={`w-7 h-7 lg:w-12 lg:h-12 text-center border rounded-lg text-xl font-bold focus:ring-2 focus:ring-yellow-400 ${
                 disable ? "bg-gray-200 cursor-not-allowed" : "bg-white"
               }`}
               required

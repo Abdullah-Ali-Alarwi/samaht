@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { FaEnvelope, FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
+import { FaEnvelope,  } from 'react-icons/fa'
 import { VscCallIncoming } from "react-icons/vsc";
 
 import { RiMapPinAddLine } from 'react-icons/ri'
@@ -40,7 +40,7 @@ export default function Page() {
       <div className='w-[80%] m-auto flex flex-col lg:flex-row   justify-around '>
 
 <div className='flex flex-col m-5 text-left w-[50%]'>
-    <textarea placeholder='write your message here...' name="" minLength={10} className='min-h-[250px] min-w-[370px] border border-gray-300 p-2 rounded-lg' id=""></textarea>
+    <textarea placeholder='write your message here...' name="" minLength={10} className='min-h-[250px] w-[300px]  lg:min-w-[370px] border border-gray-300 p-2 rounded-lg' id=""></textarea>
     <button className='cursor-pointer my-5  w-[200px] bg-yellow-400 text-white py-2 px-4 rounded-lg'>Submit</button>
 </div>
 

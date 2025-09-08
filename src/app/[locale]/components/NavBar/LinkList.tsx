@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -9,8 +9,10 @@ import { useTranslations } from "next-intl";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const t = useTranslations("Navbar"); 
-  const tIndex = useTranslations("Index"); 
+  const t = useTranslations("Navbar");
+  const tIndex = useTranslations("Index");
+
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const links = [
     { href: "/ProductPage", label: "products" },
@@ -19,15 +21,33 @@ export default function Navbar() {
     { href: "/wishlist", label: "wishlist" },
     { href: "/checkout", label: "checkout" },
     { href: "/ContactUs", label: "ContactUs" },
-    { href: "/FAQ", label: "FAQ" }
+    { href: "/FAQ", label: "FAQ" },
   ];
 
+  // ✅ إغلاق القائمة عند النقر خارجها
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
   return (
-    <nav className="relative w-[80%]  z-50">
+    <nav className="relative w-[80%] z-50" ref={menuRef}>
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        
         {/* روابط الديسكتوب */}
-        <div className="hidden md:flex space-x-6 rtl:space-x-reverse">
+        <div className="hidden lg:flex space-x-6 rtl:space-x-reverse">
           {links.map((link) => {
             const isActive = pathname.startsWith(link.href);
             return (
@@ -47,9 +67,9 @@ export default function Navbar() {
         </div>
 
         {/* زر الموبايل */}
-           <h1 className="block lg:hidden">{tIndex("List")}</h1>
+        <h1 className="block lg:hidden">{tIndex("List")}</h1>
         <button
-          className="md:hidden transition"
+          className="lg:hidden transition"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -58,14 +78,11 @@ export default function Navbar() {
             <ChevronRight size={28} className="text-gray-500" />
           )}
         </button>
-
-        {/* عنوان القائمة */}
-     
       </div>
 
       {/* قائمة الموبايل */}
       {open && (
-        <div className="absolute top-16 left-0 w-[300px] bg-white shadow-lg md:hidden py-4 space-y-3 ">
+        <div className="absolute top-16 left-0 w-[300px] bg-white shadow-lg lg:hidden py-4 space-y-3">
           {links.map((link) => {
             const isActive = pathname.startsWith(link.href);
             return (

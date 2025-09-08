@@ -6,11 +6,13 @@ import useOrderStore from "@/src/store/OrderStore";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/navigation"; // ✅ استدعاء useRouter
 
 export default function CheckoutPage() {
   const { cart, clearCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCartStore();
   const { addOrder } = useOrderStore();
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); // ✅ تعريف الرواتر
 
   // بيانات العميل
   const [firstName, setFirstName] = useState("");
@@ -35,15 +37,14 @@ export default function CheckoutPage() {
 
     setLoading(true);
 
-    // إنشاء الطلب مع تحويل id لكل عنصر إلى string
     const newOrder = {
       id: uuidv4(),
       items: cart.map(item => ({
-        id: item.id.toString(),   // <-- تحويل الرقم إلى نص
+        id: item.id.toString(),
         title: item.title,
         quantity: item.quantity,
         price: item.price,
-        thumbnail: item.thumbnail
+        thumbnail: item.thumbnail,
       })),
       total: totalPrice,
       firstName,
@@ -57,11 +58,13 @@ export default function CheckoutPage() {
 
     addOrder(newOrder);
 
-    // تجربة بسيطة: عرض رسالة نجاح بعد ثانية
     setTimeout(() => {
       toast.success("تمت العملية بنجاح وحفظ الطلب!");
       setLoading(false);
       clearCart();
+
+      // ✅ إعادة توجيه لصفحة order-success
+      router.push("/order-success");
 
       // إعادة تعيين بيانات العميل
       setFirstName("");

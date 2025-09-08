@@ -9,8 +9,9 @@ export default function RegisterPage() {
 
 
   return (
-    <div className="w-screen h-screen bg-[url('/image/loginCartimage.jpg')] bg-cover bg-center flex items-center justify-start">
-      <div className="bg-white lg:px-40 p-10 h-full shadow-lg w-screen lg:w-[50%]">
+<div className="w-screen h-screen  flex justify-center items-center bg-amber-700/5 p-10   ">   
+
+      <div className="bg-white lg:px-40 p-10 h-full rounded-md shadow-lg w-screen lg:w-[50%]">
         <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
 
      

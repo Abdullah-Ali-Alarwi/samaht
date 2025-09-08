@@ -24,8 +24,8 @@ export default function ForgetPasswordPage() {
   };
 
   return (
-    <div className="  bg-[url('/image/loginCartimage.jpg')] bg-cover flex justify-center items-center p-5">
-      <div className="bg-white w-[100%] max-w-md p-10 flex flex-col items-center rounded-lg shadow-md">
+    <div className="w-screen   flex justify-center items-center bg-amber-700/5 p-10  ">   
+      <div className="bg-white w-[100%] max-w-md p-10 flex flex-col items-center h-full rounded-lg shadow-md">
         <h2 className="text-3xl font-bold mb-4 text-center">نسيت كلمة المرور</h2>
         <Image src="/image/forgetPass.png" alt="Forget Password" width={100} height={100} className="mb-4" />
 
@@ -35,7 +35,7 @@ export default function ForgetPasswordPage() {
 
         <Link
           href="/signin"
-          className="mt-4 w-1/2 text-center text-yellow-500 border border-amber-500 px-4 py-2 rounded-lg font-semibold bg-white hover:bg-yellow-500 hover:text-white transition"
+          className="mt-4 w-full text-center text-yellow-500 border border-amber-500 px-4 py-2 rounded-lg font-semibold bg-white hover:bg-yellow-500 hover:text-white transition"
         >
           العودة إلى تسجيل الدخول
         </Link>
