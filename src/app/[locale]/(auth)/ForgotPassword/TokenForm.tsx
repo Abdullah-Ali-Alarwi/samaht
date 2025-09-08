@@ -68,7 +68,7 @@ export default function TokenForm({ token, setToken, disable, onSubmit }: Props)
     <div className="w-full flex flex-col gap-4 mb-6 border-b-2 border-yellow-300 p-3">
       <p>لكي تتمكن من تغيير كلمة السر يجب إدخال رمز التحقق عبر البريد</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="flex justify-between flex-wrap gap-1">
+        <div className="flex justify-between flex-wrap ">
           {otp.map((digit, index) => (
             <input
               key={index}

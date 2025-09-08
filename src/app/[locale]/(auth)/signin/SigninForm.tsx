@@ -5,7 +5,8 @@ import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
-
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { usePathname } from "next/navigation";
 import Alert from "./Alert";
 import Spinner from "../../components/Ui/spinner";
 import { LoginSchema } from "@/src/utils/validationScema";
@@ -22,9 +23,13 @@ interface ExtendedUser {
 export default function SigninForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isRTL = pathname.startsWith("/ar"); // ✅ تحديد اتجاه اللغة
 
   const FormSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +59,6 @@ export default function SigninForm() {
 
       toast.success(res.message);
 
-      // تسجيل الدخول للحصول على session
       await signIn("credentials", {
         redirect: false,
         email: validation.data.email,
@@ -65,9 +69,9 @@ export default function SigninForm() {
       const user = session?.user as ExtendedUser;
 
       if (user?.emailVerified) {
-        router.push("/"); // الحساب مفعل
+        router.push("/");
       } else {
-        router.push("/verify"); // الحساب غير مفعل
+        router.push("/verify");
       }
 
     } catch (err) {
@@ -102,14 +106,27 @@ export default function SigninForm() {
           required
           className="border rounded-lg px-3 py-2"
         />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="border rounded-lg px-3 py-2"
-        />
+
+        {/* كلمة المرور مع زر العين المتغير اتجاهه */}
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className={`border rounded-lg px-3 py-2 w-full ${isRTL ? "pr-3 pl-10" : "pl-3 pr-10"}`}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className={`absolute top-1/2 -translate-y-1/2 text-gray-500 ${
+              isRTL ? "left-3" : "right-3"
+            }`}
+          >
+            {showPassword ? <AiOutlineEyeInvisible size={22} /> : <AiOutlineEye size={22} />}
+          </button>
+        </div>
 
         <Link href="/ForgotPassword" className="text-sm text-yellow-500 hover:underline">
           Forgot your password?
