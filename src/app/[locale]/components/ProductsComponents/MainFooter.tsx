@@ -15,7 +15,7 @@ export default function MainFooter() {
     
    <div className="contentfooter   flex  flex-col lg:flex-row  gap-5  lg:items-center">
      <div className="left   lg:w-1/2">
-          <p className="text-sm m-10">
+          <p className="text-sm my-10 leading-10  lg:m-10">
           {t("our_website")}
           </p>
         
