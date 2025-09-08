@@ -6,15 +6,14 @@ import useOrderStore from "@/src/store/OrderStore";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
-import { useRouter } from "next/navigation"; // ✅ استدعاء useRouter
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
   const { cart, clearCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCartStore();
   const { addOrder } = useOrderStore();
   const [loading, setLoading] = useState(false);
-  const router = useRouter(); // ✅ تعريف الرواتر
+  const router = useRouter();
 
-  // بيانات العميل
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -62,11 +61,7 @@ export default function CheckoutPage() {
       toast.success("تمت العملية بنجاح وحفظ الطلب!");
       setLoading(false);
       clearCart();
-
-      // ✅ إعادة توجيه لصفحة order-success
       router.push("/order-success");
-
-      // إعادة تعيين بيانات العميل
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -133,39 +128,64 @@ export default function CheckoutPage() {
           className="border rounded w-full bg-gray-100 p-3"
         />
 
-        {/* جدول السلة */}
-        <table className="w-full border-collapse border border-gray-300 text-center mt-4">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2">الصورة</th>
-              <th className="border p-2">المنتج</th>
-              <th className="border p-2">السعر</th>
-              <th className="border p-2">الكمية</th>
-              <th className="border p-2">الإجمالي</th>
-              <th className="border p-2">حذف</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart.map((item) => (
-              <tr key={item.id}>
-                <td className="border p-2">
-                  <Image src={item.thumbnail} alt={item.title} width={50} height={50} />
-                </td>
-                <td className="border p-2">{item.title}</td>
-                <td className="border p-2">${item.price.toFixed(2)}</td>
-                <td className="border p-2 flex justify-center items-center gap-2">
+        {/* جدول السلة للشاشات الكبيرة */}
+        <div className="hidden lg:block mt-4">
+          <table className="w-full border-collapse border border-gray-300 text-center">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border p-2">الصورة</th>
+                <th className="border p-2">المنتج</th>
+                <th className="border p-2">السعر</th>
+                <th className="border p-2">الكمية</th>
+                <th className="border p-2">الإجمالي</th>
+                <th className="border p-2">حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item) => (
+                <tr key={item.id}>
+                  <td className="border p-2">
+                    <Image src={item.thumbnail} alt={item.title} width={50} height={50} />
+                  </td>
+                  <td className="border p-2">{item.title}</td>
+                  <td className="border p-2">${item.price.toFixed(2)}</td>
+                  <td className="border p-2 flex justify-center items-center gap-2">
+                    <button className="bg-gray-200 px-2 rounded" onClick={() => decreaseQuantity(item.id)}>-</button>
+                    <span>{item.quantity}</span>
+                    <button className="bg-gray-200 px-2 rounded" onClick={() => increaseQuantity(item.id)}>+</button>
+                  </td>
+                  <td className="border p-2">${(item.price * item.quantity).toFixed(2)}</td>
+                  <td className="border p-2">
+                    <button className="bg-red-500 text-white px-2 rounded" onClick={() => removeFromCart(item.id)}>x</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* قائمة السلة على الشاشات الصغيرة */}
+        <div className="lg:hidden mt-4 flex flex-col gap-3">
+          {cart.map((item) => (
+            <div key={item.id} className="flex justify-between items-center p-3 bg-gray-50 rounded shadow">
+              <div className="flex items-center gap-3">
+                <Image src={item.thumbnail} alt={item.title} width={50} height={50} />
+                <div className="flex flex-col">
+                  <span className="font-semibold">{item.title}</span>
+                  <span>${item.price.toFixed(2)}</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-end gap-2">
+                <div className="flex items-center gap-2">
                   <button className="bg-gray-200 px-2 rounded" onClick={() => decreaseQuantity(item.id)}>-</button>
                   <span>{item.quantity}</span>
                   <button className="bg-gray-200 px-2 rounded" onClick={() => increaseQuantity(item.id)}>+</button>
-                </td>
-                <td className="border p-2">${(item.price * item.quantity).toFixed(2)}</td>
-                <td className="border p-2">
-                  <button className="bg-red-500 text-white px-2 rounded" onClick={() => removeFromCart(item.id)}>x</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </div>
+                <button className="bg-red-500 text-white px-2 rounded" onClick={() => removeFromCart(item.id)}>حذف</button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* ملخص السلة */}
