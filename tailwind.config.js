@@ -7,10 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-       fontFamily: {
-        noto: ["var(--font-notoKufi)"],
+      fontFamily: {
+        sans: ["var(--font-cairo)", "sans-serif"], // استخدمنا CSS variable للخط Cairo
       },
-      
     },
   },
   plugins: [],

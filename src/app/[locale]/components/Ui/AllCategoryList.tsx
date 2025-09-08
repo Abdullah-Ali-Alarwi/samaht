@@ -40,7 +40,7 @@ export default function AllCategoryList() {
         className="text-2xl px-4 py-2 rounded-md flex items-center gap-2"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <p className="hidden w-[100px] lg:flex text-gray-800 text-[18px]">{t("all_sections")}</p>
+        <p className="hidden w-[150px] lg:flex text-gray-800 text-[18px]">{t("all_sections")}</p>
         <CiMenuBurger />
       </button>
 

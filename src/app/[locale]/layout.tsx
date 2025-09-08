@@ -7,12 +7,13 @@ import "../styles/globals.css";
 import ProvidersWrapper from "@/src/app/[locale]/components/ProvidersWrapper";
 import { Toaster } from "react-hot-toast";
 
-import { Noto_Kufi_Arabic } from "next/font/google";
+import { Cairo } from "next/font/google"; // استخدم خط Cairo
 
-const notoKufi = Noto_Kufi_Arabic({
-  subsets: ["arabic"], // مهم لأنه خط عربي
-  weight: ["400", "500", "600", "700"], // الأوزان اللي تحتاجها
-  variable: "--font-notoKufi", // نعرفه كـ CSS variable
+// تعريف الخط Cairo كـ CSS variable
+const cairo = Cairo({
+  subsets: ["arabic", "latin"], // لتغطية العربية والإنجليزية
+  weight: ["400", "500", "700"], // الأوزان اللي تحتاجها
+  variable: "--font-cairo",
 });
 
 export default async function LocaleLayout({
@@ -20,9 +21,9 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; // 👈 نحددها كـ Promise
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params; // 👈 ننتظرها
+  const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -32,8 +33,8 @@ export default async function LocaleLayout({
   const direction = locale === "ar" ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={direction} className={notoKufi.variable}>
-      <body>
+    <html lang={locale} dir={direction} className={cairo.variable}>
+      <body className="font-sans"> {/* نستفيد من Tailwind font-sans */}
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ProvidersWrapper>
             <MainNave />

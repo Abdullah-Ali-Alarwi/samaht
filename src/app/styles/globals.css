@@ -124,3 +124,7 @@
 a, button{
  cursor: pointer;
 }
+body {
+  @apply bg-background text-foreground;
+  font-family: var(--font-cairo), sans-serif; /* 👈 استبدل النوتو بالكيرو */
+}
