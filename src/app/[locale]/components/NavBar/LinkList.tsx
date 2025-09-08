@@ -11,7 +11,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const t = useTranslations("Navbar");
   const tIndex = useTranslations("Index");
-
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const links = [
@@ -24,6 +23,7 @@ export default function Navbar() {
     { href: "/FAQ", label: "FAQ" },
   ];
 
+  // إغلاق القائمة عند النقر خارجها
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -43,7 +43,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <nav className="relative w-full z-50 bg-white " ref={menuRef}>
+    <nav className="relative w-full z-50 bg-white" ref={menuRef}>
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         {/* روابط الديسكتوب */}
         <div className="hidden lg:flex space-x-6 rtl:space-x-reverse">
@@ -66,10 +66,9 @@ export default function Navbar() {
         </div>
 
         {/* زر الموبايل */}
-        <div className="flex items-center w- lg:hidden gap-2">
-          <h1 className="text-lg font-semibold">{tIndex("List")}</h1>
+        <div className="flex items-center lg:hidden gap-2">
           <button
-            className="transition p-2 rounded-md   hover:bg-gray-100"
+            className="transition p-2 rounded-md hover:bg-gray-100 flex items-center gap-2"
             onClick={() => setOpen(!open)}
           >
             {open ? (
@@ -86,8 +85,13 @@ export default function Navbar() {
         <div
           className={`absolute top-16 ${
             pathname.startsWith("/ar") ? "right-0" : "left-0"
-          } w-full sm:w-[300px] bg-white  lg:hidden py-4 space-y-2 z-50`}
+          } w-full sm:w-[300px] bg-white lg:hidden py-4 space-y-2 z-50`}
         >
+          {/* العنوان داخل القائمة فقط على الشاشات الصغيرة */}
+          <h2 className="px-6 py-2 font-semibold text-gray-700 border-b">
+            {tIndex("List")}
+          </h2>
+
           {links.map((link) => {
             const isActive = pathname.startsWith(link.href);
             return (
