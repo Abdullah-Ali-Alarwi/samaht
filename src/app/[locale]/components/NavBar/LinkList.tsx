@@ -24,7 +24,6 @@ export default function Navbar() {
     { href: "/FAQ", label: "FAQ" },
   ];
 
-  // ✅ إغلاق القائمة عند النقر خارجها
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -44,7 +43,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <nav className="relative w-[80%] z-50" ref={menuRef}>
+    <nav className="relative w-full z-50 bg-white " ref={menuRef}>
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         {/* روابط الديسكتوب */}
         <div className="hidden lg:flex space-x-6 rtl:space-x-reverse">
@@ -56,7 +55,7 @@ export default function Navbar() {
                 href={link.href}
                 className={`transition relative ${
                   isActive
-                    ? "text-yellow-500 m-5 font-semibold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-yellow-500"
+                    ? "text-yellow-500 font-semibold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-yellow-500"
                     : "text-gray-700 hover:text-yellow-600"
                 }`}
               >
@@ -67,29 +66,35 @@ export default function Navbar() {
         </div>
 
         {/* زر الموبايل */}
-        <h1 className="block lg:hidden">{tIndex("List")}</h1>
-        <button
-          className="lg:hidden transition"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? (
-            <ChevronDown size={28} className="text-yellow-500" />
-          ) : (
-            <ChevronRight size={28} className="text-gray-500" />
-          )}
-        </button>
+        <div className="flex items-center w- lg:hidden gap-2">
+          <h1 className="text-lg font-semibold">{tIndex("List")}</h1>
+          <button
+            className="transition p-2 rounded-md   hover:bg-gray-100"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? (
+              <ChevronDown size={28} className="text-yellow-500" />
+            ) : (
+              <ChevronRight size={28} className="text-gray-500" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* قائمة الموبايل */}
       {open && (
-        <div className="absolute top-16 left-0 w-[300px] bg-white shadow-lg lg:hidden py-4 space-y-3">
+        <div
+          className={`absolute top-16 ${
+            pathname.startsWith("/ar") ? "right-0" : "left-0"
+          } w-full sm:w-[300px] bg-white  lg:hidden py-4 space-y-2 z-50`}
+        >
           {links.map((link) => {
             const isActive = pathname.startsWith(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block px-6 py-2 transition ${
+                className={`block px-6 py-3 transition break-words ${
                   isActive
                     ? "text-yellow-500 font-semibold bg-yellow-50 rounded-md"
                     : "text-gray-700 hover:text-yellow-600"

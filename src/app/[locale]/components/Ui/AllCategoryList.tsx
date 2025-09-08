@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { useTranslations } from "next-intl";
 import useProductStore from "@/src/store/ProductsStore";
-import { usePathname } from "next/navigation"; // App Router
+import { usePathname } from "next/navigation";
 
 export default function AllCategoryList() {
   const { products, setSelectedCategory } = useProductStore();
@@ -14,10 +14,8 @@ export default function AllCategoryList() {
   const [categories, setCategories] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // RTL بناءً على المسار
   const isRTL = pathname.startsWith("/ar");
 
-  // إغلاق القائمة عند الضغط خارجها
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -28,31 +26,33 @@ export default function AllCategoryList() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // استخراج الكاتيجوري الفريدة من المنتجات
   useEffect(() => {
     const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
     setCategories(uniqueCategories);
   }, [products]);
 
   return (
-    <div className="relative inline-block z-50" ref={dropdownRef} dir={isRTL ? "rtl" : "ltr"}>
+    <div className="relative inline-block z-50 w-full lg:w-auto" ref={dropdownRef} dir={isRTL ? "rtl" : "ltr"}>
       <button
-        className="text-2xl px-4 py-2 rounded-md flex items-center gap-2"
+        className="w-full lg:w-auto text-2xl  px-4 py-2 rounded-md flex items-center justify-between lg:justify-start gap-2 bg-gray-100 lg:bg-gray-50 hover:bg-gray-200 transition"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <p className="hidden w-[150px] lg:flex text-gray-800 text-[18px]">{t("all_sections")}</p>
+        <span className="hidden lg:flex text-gray-800 text-[18px] w-[150px] font-semibold">{t("all_sections")}</span>
         <CiMenuBurger />
       </button>
 
       {isOpen && (
         <ul
-          className={`absolute mt-1 w-screen max-h-[60vh] overflow-y-auto text-sm bg-white border rounded-md shadow-lg
-                      grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 z-50
-                      ${isRTL ? "left-[-82px] text-right" : "right-[-82px] text-left"}`}
+          className={`
+            absolute top-full mt-1 w-full lg:w-[300px] max-h-[60vh] overflow-y-auto
+            bg-white border rounded-md shadow-lg z-50
+            ${isRTL ? "right-0 text-right" : "left-0 text-left"}
+            divide-y divide-gray-200
+          `}
         >
-          {/* خيار لكل الأقسام */}
+          {/* خيار كل الأقسام */}
           <li
-            className="relative hover:bg-gray-200 px-4 py-2 cursor-pointer font-semibold"
+            className="px-4 py-3 cursor-pointer font-semibold hover:bg-gray-100"
             onClick={() => setSelectedCategory(null)}
           >
             {t("all_sections")}
@@ -62,7 +62,7 @@ export default function AllCategoryList() {
           {categories.map((cat, index) => (
             <li
               key={index}
-              className="relative hover:bg-gray-200 px-4 py-2 cursor-pointer"
+              className="px-4 py-3 cursor-pointer hover:text-yellow-500 hover:bg-gray-100 break-words"
               onClick={() => setSelectedCategory(cat)}
             >
               {cat}
