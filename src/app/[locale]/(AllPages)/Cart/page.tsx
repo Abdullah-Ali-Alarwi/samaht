@@ -24,8 +24,8 @@ export default function CartPage() {
 
   return (
     <div className="w-[90%] m-auto mt-5 flex flex-col lg:flex-row gap-6">
-      {/* جدول المنتجات */}
-      <div className="flex-1">
+      {/* جدول المنتجات على الشاشات الكبيرة */}
+      <div className="flex-1 hidden lg:block">
         <h1 className="text-2xl font-bold mb-4">
           Your Cart Items <span className="text-yellow-500">({cart.length})</span>
         </h1>
@@ -82,8 +82,52 @@ export default function CartPage() {
         </table>
       </div>
 
+      {/* قائمة المنتجات على الشاشات الصغيرة */}
+      <div className="lg:hidden flex flex-col gap-3">
+        {cart.map((item) => (
+          <div
+            key={item.id}
+            className="flex justify-between items-center p-3 bg-gray-50 rounded shadow"
+          >
+            <div className="flex items-center gap-3">
+              <Image src={item.thumbnail} alt={item.title} width={80} height={80} />
+              <div className="flex flex-col text-sm">
+                <span className="font-semibold">{item.title}</span>
+                <span className="text-gray-500">{item.category}</span>
+                <span>Price: ${item.price.toFixed(2)}</span>
+                <span>Quantity: {item.quantity}</span>
+                <span>Total: ${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            </div>
+            <div className="flex flex-col items-end gap-2">
+              <div className="flex items-center gap-2">
+                <button
+                  className="bg-gray-200 px-2 rounded"
+                  onClick={() => decreaseQuantity(item.id)}
+                >
+                  -
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  className="bg-gray-200 px-2 rounded"
+                  onClick={() => increaseQuantity(item.id)}
+                >
+                  +
+                </button>
+              </div>
+              <button
+                className="bg-red-500 text-white px-2 rounded"
+                onClick={() => removeFromCart(item.id)}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* ملخص الطلب */}
-      <div className="w-full lg:w-1/3 border p-4 rounded shadow-md">
+      <div className="w-full lg:w-1/3 border p-4 rounded shadow-md flex flex-col gap-3">
         <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
         <div className="flex justify-between mb-2">
           <span>Subtotal</span>
