@@ -80,9 +80,20 @@ export default function Header2() {
               <SlBasketLoaded className="text-2xl" />
 
             </Link>
-             
+               <Link className="text-2xl" href="/wishlist">
+            {wishlist.length > 0 ? (
+              <div className="text-red-600">
+                <FaHeart />
+              </div>
+            ) : (
+              <GoHeart />
+            )}
+          </Link>
              <ChangeLanguage/>
+
+             
              <UserMenu  />
+             
           </div>
             {/* User Info Component */}
        

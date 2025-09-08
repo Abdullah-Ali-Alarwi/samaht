@@ -24,17 +24,17 @@ export default function ChangeLanguage() {
     <div className="flex items-center">
       <label
         htmlFor="language"
-        className="mx-2 text-3xl text-white bg-amber-400 rounded-full p-1"
+        className="mx-2 text-3x2 text-white bg-amber-400 rounded-full p-1"
       >
         <RiGlobalLine />
       </label>
       <select
         id="language"
-        className="border-2 text-sm border-gray-300 rounded-full p-1"
+        className="border-b-2 px-2 text-[12px] border-gray-300  p-1"
         onChange={handleChange}
         defaultValue={pathname.split("/")[1]} // القيمة الحالية للغة
       >
-        <option value="en">English</option>
+        <option  value="en">English</option>
         <option value="ar">العربية</option>
       </select>
     </div>
