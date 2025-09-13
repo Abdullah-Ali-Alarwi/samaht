@@ -1,5 +1,5 @@
 "use client";
-import CartItem from '@/src/app/[locale]/components/Ui/CartItem';
+import Producitem from './Producitem';
 import useProductStore from '@/src/store/ProductsStore';
 import React, { useEffect } from 'react';
 
@@ -27,7 +27,7 @@ export default function Page() {
         <div className="flex gap-5 lg:gap-3 flex-wrap m-auto justify-center">
           {filteredProducts.length > 0 ? (
             filteredProducts.map(product => (
-              <CartItem key={product.id} product={product} />
+              <Producitem key={product.id} product={product} />
             ))
           ) : (
             <p className="text-center w-full my-5">No products found for this category.</p>

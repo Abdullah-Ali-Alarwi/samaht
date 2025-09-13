@@ -30,6 +30,7 @@ export default function Products({ title }: ProductsProps) {
 
   return (
     <div className="w-full mt-8">
+
       <h1 className="text-2xl font-bold mb-4 text-left m-10 text-yellow-400">
         {title}
       </h1>
@@ -38,6 +39,7 @@ export default function Products({ title }: ProductsProps) {
         <p className="text-center text-gray-500">لا توجد نتائج مطابقة</p>
       ) : (
         <div className="w-[55%] md:w-[90%] lg:w-[90%] flex m-auto mt-5">
+      
           <Carousel className="w-[90%] m-auto mt-5">
             <CarouselPrevious />
             <CarouselNext />
@@ -45,7 +47,7 @@ export default function Products({ title }: ProductsProps) {
               {filteredProducts.map((product: Product) => (
                 <CarouselItem
                   key={product.id}
-                  className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                  className="basis-full m-auto sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 "
                 >
                   <CartItem product={product} />
                 </CarouselItem>

@@ -13,7 +13,7 @@ interface CartItemProps {
   product?: Product;
 }
 
-export default function CartItem({ product }: CartItemProps) {
+export default function Producitem({ product }: CartItemProps) {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
 
   if (!product) return null; // لو المنتج مش موجود ما نعرض شيء
@@ -32,18 +32,23 @@ export default function CartItem({ product }: CartItemProps) {
   const imageSrc: string | typeof item = product.thumbnail ?? item;
 
   return (
-    <div className="h-[296px] m-auto w-[200px] rounded-2xl text-center border-b-2 border-gray-400 shadow-md overflow-hidden">
+    <div className=" p-2 lg:h-[296px] w-[150px] lg:w-[200px] rounded-2xl text-center border-b-2 border-gray-400 shadow-md overflow-hidden">
       {/* حاوية الصورة */}
-      <div className="relative w-full h-[80%]">
-        <Link href={`/ProductPage/${product.id}`} className="text-blue-500 hover:underline">
-          <Image
-            src={imageSrc}
-            alt={product.title || "Product Image"}
-            width={200}
-            height={200}
-            className="object-cover w-full h-full"
-          />
-        </Link>
+      <div className="relative w-full h-[70%]">
+  <Link
+  href={`/ProductPage/${product.id}`}
+  className="block w-[100%] h-[100%] m-auto "
+>
+  <Image
+    src={imageSrc}
+    alt={product.title || "Product Image"}
+    width={0}           // نعطيه صفر علشان نتحكم بالـ CSS
+    height={0}
+    sizes="100vw"
+    className="object-cover w-full h-full rounded-md"
+  />
+</Link>
+
 
         {/* أيقونة القلب */}
         {liked ? (
