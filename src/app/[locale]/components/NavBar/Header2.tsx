@@ -28,10 +28,7 @@ export default function Header2() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Detect direction based on locale or document
-  const direction = typeof document !== "undefined"
-    ? document.dir
-    : "ltr";
+  const direction = typeof document !== "undefined" ? document.dir : "ltr";
 
   const handleSignIn = () => router.push("/signin");
   const handleSignOut = () => signOut();
@@ -86,11 +83,12 @@ export default function Header2() {
               </button>
 
               {isDropdownOpen && (
-<div
-  className={`absolute mt-2 w-48 border rounded shadow-lg bg-white p-2 z-50 ${
-    direction === "rtl" ? "left-0" : "right-0"
-  }`}
->                  <div className="flex flex-col items-center gap-2 border-b pb-2 mb-2">
+                <div
+                  className={`absolute mt-2 w-48 border rounded shadow-lg bg-white p-2 z-50 ${
+                    direction === "rtl" ? "left-0" : "right-0"
+                  }`}
+                >
+                  <div className="flex flex-col items-center gap-2 border-b pb-2 mb-2">
                     {session.user?.image && (
                       <Image
                         src={session.user.image}
@@ -100,12 +98,16 @@ export default function Header2() {
                         className="rounded-full object-cover"
                       />
                     )}
-                    <span className="font-semibold text-[14px]">{session.user?.name}</span>
-                    <span className="text-sm text-gray-500">{session.user?.email}</span>
+                    <span className="font-semibold text-[14px]">
+                      {session.user?.name}
+                    </span>
+                    <span className="text-sm text-gray-500">
+                      {session.user?.email}
+                    </span>
                   </div>
                   <button
                     onClick={handleSignOut}
-                    className="flex items-center  text-[14px] gap-2 w-full justify-center text-red-600 hover:text-red-800"
+                    className="flex items-center text-[14px] gap-2 w-full justify-center text-red-600 hover:text-red-800"
                   >
                     <BiLogOut />
                     {t("signOut")}
@@ -135,6 +137,7 @@ export default function Header2() {
             </Link>
           </div>
 
+          {/* User Icon opens SideMenu */}
           <button onClick={() => setIsSideMenuOpen(true)}>
             <FaRegUser className="text-2xl" />
           </button>
@@ -146,8 +149,15 @@ export default function Header2() {
         <SearchNav />
       </div>
 
-      {/* SideMenu for Mobile */}
-      <SideMenu isOpen={isSideMenuOpen} onClose={() => setIsSideMenuOpen(false)} />
+      {/* SideMenu for Mobile (only when open) */}
+      <div className="lg:hidden">
+        {isSideMenuOpen && (
+          <SideMenu
+            isOpen={isSideMenuOpen}
+            onClose={() => setIsSideMenuOpen(false)}
+          />
+        )}
+      </div>
     </header>
   );
 }
