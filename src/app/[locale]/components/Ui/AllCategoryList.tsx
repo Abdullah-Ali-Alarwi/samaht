@@ -6,7 +6,7 @@ import useProductStore from "@/src/store/ProductsStore";
 import { usePathname } from "next/navigation";
 
 export default function AllCategoryList() {
-  const { products, setSelectedCategory } = useProductStore();
+  const { products, selectedCategory, setSelectedCategory } = useProductStore();
   const t = useTranslations("Index");
   const pathname = usePathname();
 
@@ -45,14 +45,17 @@ export default function AllCategoryList() {
     setIsOpen(false);
   };
 
+  // اسم القسم الذي سيتم عرضه في الزر
+  const displayCategory = selectedCategory ? selectedCategory : t("all_sections");
+
   return (
     <div className="relative inline-block z-50 w-full lg:w-auto" dir={isRTL ? "rtl" : "ltr"}>
       <button
         ref={buttonRef}
-        className="w-full lg:w-auto text-2xl px-4 py-2 rounded-md flex items-center justify-between lg:justify-start gap-2 bg-gray-100 lg:bg-gray-50 hover:bg-gray-200 transition"
+        className="w-full lg:w-auto text-2xl px-4 py-2 rounded-md flex items-center justify-between lg:justify-start gap-2  lg:bg-gray-50 hover:bg-gray-200 transition"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="hidden lg:flex text-gray-800 text-[18px] w-[150px] font-semibold">{t("all_sections")}</span>
+        <span className="text-gray-800 text-[18px] w-[150px] font-semibold">{displayCategory}</span>
         <CiMenuBurger />
       </button>
 

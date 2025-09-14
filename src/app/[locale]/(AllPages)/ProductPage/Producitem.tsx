@@ -32,7 +32,7 @@ export default function Producitem({ product }: CartItemProps) {
   const imageSrc: string | typeof item = product.thumbnail ?? item;
 
   return (
-    <div className=" p-2 lg:h-[296px] w-[150px] lg:w-[200px] rounded-2xl text-center border-b-2 border-gray-400 shadow-md overflow-hidden">
+    <div className=" p-2 lg:h-[296px] w-[205px] lg:w-[200px] rounded-2xl text-center border-b-2 border-gray-400 shadow-md overflow-hidden">
       {/* حاوية الصورة */}
       <div className="relative w-full h-[70%]">
   <Link
@@ -69,7 +69,7 @@ export default function Producitem({ product }: CartItemProps) {
       </p>
 
       <div className="mt-2">
-        <span className="font-semibold text-gray-800">
+        <span className="font-bold text-green-700 ">
           {product.price} $
         </span>
       </div>

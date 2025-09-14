@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -23,13 +22,15 @@ export default function Navbar() {
     { href: "/FAQ", label: "FAQ" },
   ];
 
+  const isRTL = pathname.startsWith("/ar");
+
   // إغلاق القائمة عند النقر خارجها
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setOpen(false);
       }
-    };
+    }
 
     if (open) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -43,65 +44,71 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <nav className="relative w-full z-50 bg-white" ref={menuRef}>
-      <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        {/* روابط الديسكتوب */}
-        <div className="hidden lg:flex space-x-6 rtl:space-x-reverse">
-          {links.map((link) => {
-            const isActive = pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`transition relative ${
-                  isActive
-                    ? "text-yellow-500 font-semibold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-yellow-500"
-                    : "text-gray-700 hover:text-yellow-600"
-                }`}
-              >
-                {t(link.label)}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* زر الموبايل */}
-        <div className="flex items-center lg:hidden gap-2">
-          <button
-            className="transition p-2 rounded-md hover:bg-gray-100 flex items-center gap-2"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? (
-              <ChevronDown size={28} className="text-yellow-500" />
-            ) : (
-              <ChevronRight size={28} className="text-gray-500" />
-            )}
-          </button>
-        </div>
+    <nav className="relative w-full z-50" ref={menuRef}>
+      {/* روابط الديسكتوب */}
+      <div className="hidden lg:flex container mx-auto px-4 items-center justify-between h-16 space-x-6 rtl:space-x-reverse">
+        {links.map((link) => {
+          const isActive = pathname.startsWith(link.href);
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`transition relative px-2 py-1 rounded-md ${
+                isActive
+                  ? "text-yellow-500 font-semibold bg-yellow-100"
+                  : "text-gray-700 hover:text-yellow-600"
+              }`}
+            >
+              {t(link.label)}
+            </Link>
+          );
+        })}
       </div>
 
-      {/* قائمة الموبايل */}
-      {open && (
-        <div
-          className={`absolute top-16 ${
-            pathname.startsWith("/ar") ? "right-0" : "left-0"
-          } w-full sm:w-[300px] bg-white lg:hidden py-4 space-y-2 z-50`}
+      {/* زر الموبايل */}
+      <div className="flex items-center lg:hidden p-2 justify-end">
+        <button
+          className="transition p-2 rounded-md hover:bg-gray-100 flex items-center gap-2"
+          onClick={() => setOpen(!open)}
         >
-          {/* العنوان داخل القائمة فقط على الشاشات الصغيرة */}
-          <h2 className="px-6 py-2 font-semibold text-gray-700 border-b">
-            {tIndex("List")}
-          </h2>
+          {open ? (
+            <ChevronDown size={28} className="text-yellow-500" />
+          ) : (
+            <ChevronRight size={28} className="text-gray-500" />
+          )}
+        </button>
+      </div>
 
+      {/* Side Menu للموبايل */}
+      <div
+        className={`fixed top-0 ${isRTL ? "right-0" : "left-0"} h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+          open ? "translate-x-0" : isRTL ? "translate-x-full" : "-translate-x-full"
+        }`}
+      >
+        {/* زر إغلاق */}
+        <div className="flex justify-end p-4">
+          <button onClick={() => setOpen(false)}>
+            <ChevronDown size={28} className="text-gray-500" />
+          </button>
+        </div>
+
+        {/* عنوان */}
+        <h2 className="px-6 py-2 font-semibold text-gray-700 border-b">
+          {tIndex("List")}
+        </h2>
+
+        {/* الروابط */}
+        <div className="flex flex-col py-2 space-y-1">
           {links.map((link) => {
             const isActive = pathname.startsWith(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block px-6 py-3 transition break-words ${
+                className={`block px-6 py-3 transition break-words rounded-md ${
                   isActive
-                    ? "text-yellow-500 font-semibold bg-yellow-50 rounded-md"
-                    : "text-gray-700 hover:text-yellow-600"
+                    ? "text-yellow-500 font-semibold bg-yellow-50"
+                    : "text-gray-700 hover:text-yellow-600 hover:bg-gray-100"
                 }`}
                 onClick={() => setOpen(false)}
               >
@@ -110,6 +117,14 @@ export default function Navbar() {
             );
           })}
         </div>
+      </div>
+
+      {/* Overlay عند فتح القائمة */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/80 z-40"
+          onClick={() => setOpen(false)}
+        ></div>
       )}
     </nav>
   );

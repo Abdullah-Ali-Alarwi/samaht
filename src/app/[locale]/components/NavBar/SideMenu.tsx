@@ -21,7 +21,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
   const { wishlist } = useWishlistStore();
   const { data: session } = useSession();
   const router = useRouter();
-  const t = useTranslations("Index"); // استخدام ترجمات Index
+  const t = useTranslations("Index");
 
   const [direction, setDirection] = useState<"rtl" | "ltr">("ltr");
 
@@ -54,7 +54,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
       {/* القائمة الجانبية */}
       <div
         dir={direction}
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 flex flex-col justify-between ${
+        className={`fixed top-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 flex flex-col justify-between ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -117,7 +117,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             </Link>
 
             {/* تسجيل الدخول أو إنشاء حساب */}
-            {!session && (
+            {!session?.user && (
               <>
                 <button
                   onClick={handleSignIn}
@@ -140,7 +140,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
         </div>
 
         {/* زر تسجيل الخروج أسفل القائمة إذا كان مسجّل دخول */}
-        {session && (
+        {session?.user && (
           <div className="p-4 border-t border-gray-200">
             <button
               onClick={handleSignOut}

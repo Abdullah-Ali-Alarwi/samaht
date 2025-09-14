@@ -358,9 +358,14 @@
 
 
 
-  "orderPlaced": "Your order has been placed successfully!"
+  "orderPlaced": "Your order has been placed successfully!",
 
 
+  "wishlist": "Wishlist",
+ 
+  "signIn": "Sign In",
+  "register": "Register",
+  "signOut": "Sign Out"
 
 
 

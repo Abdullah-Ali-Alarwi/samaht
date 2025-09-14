@@ -28,20 +28,28 @@ export default function CartItem({ product }: CartItemProps) {
     }
   };
 
-  // تحديد مصدر الصورة بشكل آمن
   const imageSrc: string | typeof item = product.thumbnail ?? item;
 
   return (
-    <div className="h-[296px] m-auto w-[200px] rounded-2xl text-center border-b-2 border-gray-400 shadow-md overflow-hidden">
+    <div
+      className="
+        h-[200px] sm:h-[250px] lg:h-[296px] 
+        w-[95%] sm:w-full 
+        rounded-2xl text-center border-b-2 border-gray-400 shadow-md overflow-hidden
+        flex flex-col
+        m-auto
+      "
+    >
       {/* حاوية الصورة */}
       <div className="relative w-full h-[80%]">
-        <Link href={`/ProductPage/${product.id}`} className="text-blue-500 hover:underline">
+        <Link href={`/ProductPage/${product.id}`} className="block w-full h-full">
           <Image
             src={imageSrc}
             alt={product.title || "Product Image"}
-            width={200}
-            height={200}
-            className="object-cover w-full h-full"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="object-cover w-full h-full rounded-md"
           />
         </Link>
 
@@ -59,14 +67,12 @@ export default function CartItem({ product }: CartItemProps) {
         )}
       </div>
 
-      <p className="truncate w-full cursor-default" title={product.title}>
+      <p className="truncate w-full cursor-default mt-1" title={product.title}>
         {product.title}
       </p>
 
-      <div className="mt-2">
-        <span className="font-semibold text-gray-800">
-          {product.price} $
-        </span>
+      <div className="mt-1">
+        <span className="font-semibold text-gray-800">{product.price} $</span>
       </div>
     </div>
   );
