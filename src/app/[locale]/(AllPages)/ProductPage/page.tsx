@@ -13,7 +13,7 @@ export default function Page() {
   const filteredProducts = getFilteredProducts();
 
   return (
-    <div className="w-[90%] m-auto">
+    <div className="w-[90%] m-auto mt-[200px]">
       <h1 className="text-left text-2xl font-bold my-5 text-yellow-400">Product Page</h1>
 
       {/* حالة التحميل */}
@@ -24,7 +24,7 @@ export default function Page() {
 
       {/* عرض المنتجات بعد الفلترة */}
       {!loading && !error && (
-        <div className="flex gap-5 lg:gap-3 flex-wrap m-auto justify-center">
+        <div className="flex  gap-2 lg:gap-3 flex-wrap m-auto justify-center">
           {filteredProducts.length > 0 ? (
             filteredProducts.map(product => (
               <Producitem key={product.id} product={product} />

@@ -7,7 +7,7 @@ import hero from "@/public/image/hero.png"
 
 export default function MainHero() {
   return (
-    <div>
+    <div className=' mt-[195px] '>
       <Image src={hero} alt="hero"  className='w-full h-auto'/>
       <CatigorySlider />
     </div>

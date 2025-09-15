@@ -72,7 +72,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row lg:justify-around w-[95%] mx-auto my-6 gap-6">
+    <div className="flex mt-[200px] flex-col lg:flex-row lg:justify-around w-[95%] mx-auto my-6 gap-6">
       {/* بيانات العميل */}
       <div className="flex flex-col gap-4 lg:w-[50%] p-4 bg-white shadow-md rounded-md">
         <h1 className="text-3xl font-bold mb-4">مرحلة الطلب</h1>

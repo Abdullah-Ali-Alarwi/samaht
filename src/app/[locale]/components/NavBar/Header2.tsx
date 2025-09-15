@@ -34,7 +34,7 @@ export default function Header2() {
   const handleSignOut = () => signOut();
 
   return (
-    <header className="border-b-2 bg-white border-gray-300">
+    <header className="   bg-[#FEFDE7] lg:bg-white border-2 border-gray-200 mb-[-10px] lg:mb-0 ">
       {/* Desktop Header */}
       <div className="hidden lg:flex w-[95%] items-center justify-between p-2 text-gray-600 px-3.5 m-auto">
         <Link href="/">
@@ -124,7 +124,7 @@ export default function Header2() {
       </div>
 
       {/* Mobile Header */}
-      <div className="lg:hidden w-full border-t border-gray-200 flex justify-between items-center p-5">
+      <div className="lg:hidden w-full border-t border-gray-200 flex justify-between items-center mb-0 p-5">
         <Link href="/">
           <Image src={logo} alt="Logo" width={80} height={80} />
         </Link>

@@ -37,7 +37,7 @@ export default async function LocaleLayout({
       <body className="font-sans"> {/* نستفيد من Tailwind font-sans */}
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ProvidersWrapper>
-            <MainNave />
+            <MainNave  />
             {children}
             <Toaster position="top-right" reverseOrder={false} />
             <MainFooter />

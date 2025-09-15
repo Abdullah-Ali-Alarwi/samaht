@@ -5,8 +5,8 @@ import RegisterForm from "./RegisterForm";
 
 export default function RegisterPage() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-amber-700/5 p-4">
-      <div className="bg-white w-full  lg:w-[70%] mx-auto lg:px-40 p-10 h-full rounded-md shadow-lg">
+    <div className="w-screen h-screen  mt-[100px] flex justify-center items-center bg-amber-700/5 p-4">
+      <div className="bg-white w-full p-10  lg:w-[70%] mx-auto lg:px-40   rounded-md shadow-lg">
         <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
 
         <RegisterForm />

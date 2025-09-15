@@ -8,7 +8,7 @@ export default function WishlistPage() {
   const { wishlist } = useWishlistStore();
 
   return (
-    <div className="w-[90%] m-auto">
+    <div className="w-[90%] m-auto mt-[200px]">
       <h1 className="text-left text-2xl font-bold my-5 text-yellow-400">
         Favorite Products
       </h1>

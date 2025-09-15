@@ -5,12 +5,12 @@ import Header3 from './NavBar/header3'
 
 export default function MainNave() {
   return (
-    <div>
-     <div className='fixed top-0 z-100 w-full bg-white'>
+    <div className='fixed top-0 z-100 w-full bg-white'>
+     <div>
       <Header1/>
      <Header2/>
      </div>
-    <div className='pt-30 lg:pt-20'>
+    <div className='bg-white'>
        <Header3/>
     </div>
     </div>

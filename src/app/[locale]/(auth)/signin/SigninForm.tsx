@@ -96,8 +96,8 @@ export default function SigninForm() {
   };
 
   return (
-    <div>
-      <form className="flex flex-col space-y-4" onSubmit={FormSubmitHandler}>
+    <div >
+      <form className="flex  flex-col space-y-4" onSubmit={FormSubmitHandler}>
         <input
           type="email"
           placeholder="Email"

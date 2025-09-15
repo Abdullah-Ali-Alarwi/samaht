@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-cairo)", "sans-serif"], // استخدمنا CSS variable للخط Cairo
       },
+      colors: {
+        customYellow: "#FEFDE7", // أضفنا اللون المخصص
+      },
     },
   },
   plugins: [],

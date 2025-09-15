@@ -42,7 +42,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
   };
 
   return (
-    <>
+    <div  className=" ">
       {/* Overlay خلف القائمة */}
       <div
         className={`fixed inset-0 bg-black/80 z-40 transition-opacity duration-300 ${
@@ -54,7 +54,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
       {/* القائمة الجانبية */}
       <div
         dir={direction}
-        className={`fixed top-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 flex flex-col justify-between ${
+        className={`fixed  top-0 h-[80%] w-64 z-102  bg-white shadow-lg  transform transition-transform duration-300 flex flex-col justify-between ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -137,9 +137,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               </>
             )}
           </nav>
-        </div>
-
-        {/* زر تسجيل الخروج أسفل القائمة إذا كان مسجّل دخول */}
+             {/* زر تسجيل الخروج أسفل القائمة إذا كان مسجّل دخول */}
         {session?.user && (
           <div className="p-4 border-t border-gray-200">
             <button
@@ -151,7 +149,10 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             </button>
           </div>
         )}
+        </div>
+
+   
       </div>
-    </>
+    </div>
   );
 }

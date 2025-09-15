@@ -19,7 +19,7 @@ export default function OrderSuccess() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
+    <div className="max-w-5xl mx-auto p-4 mt-[200px]">
       <h1 className="text-3xl font-bold mb-6 text-center">{t("yourOrders")}</h1>
 
       {orders

@@ -49,7 +49,7 @@ export default function AllCategoryList() {
   const displayCategory = selectedCategory ? selectedCategory : t("all_sections");
 
   return (
-    <div className="relative inline-block z-50 w-full lg:w-auto" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="relative  inline-block z-40 w-full lg:w-auto" dir={isRTL ? "rtl" : "ltr"}>
       <button
         ref={buttonRef}
         className="w-full lg:w-auto text-2xl px-4 py-2 rounded-md flex items-center justify-between lg:justify-start gap-2  lg:bg-gray-50 hover:bg-gray-200 transition"

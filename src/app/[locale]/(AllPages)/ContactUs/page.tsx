@@ -11,7 +11,7 @@ export default function Page() {
     <div className='mb-20 mt-20 w-ful lg:w-[80% my-auto] '>
     
 
-      <div className="flex  gap-10 flex-col lg:flex-row justify-around items-center mt-20 mb-20 w-[80%] m-auto">
+      <div className="flex  gap-10 flex-col lg:flex-row justify-around items-center mt-[200px] mb-20 w-[80%] m-auto">
         <div className="flex flex-col justify-center items-center">
           {/* Bigger SVG icon */}
           <VscCallIncoming className="text-yellow-400 w-[50px] h-[50px]" />

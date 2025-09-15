@@ -3,7 +3,7 @@ import { FaCheck } from 'react-icons/fa'
 
 export default function page() {
   return (
-    <div className=' flex justify-center items-center'>
+    <div className=' flex justify-center items-center mt-[200px]'>
       <div>
       <h1 className='text-[24px] m-10 text-yellow-500'>الاشتراكات </h1>
 
