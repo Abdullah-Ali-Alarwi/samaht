@@ -24,7 +24,7 @@ export default function Page() {
 
       {/* عرض المنتجات بعد الفلترة */}
       {!loading && !error && (
-        <div className="flex  gap-2 lg:gap-3 flex-wrap m-auto justify-center">
+        <div className="flex  gap-2  lg:gap-3 flex-wrap m-auto justify-center">
           {filteredProducts.length > 0 ? (
             filteredProducts.map(product => (
               <Producitem key={product.id} product={product} />
