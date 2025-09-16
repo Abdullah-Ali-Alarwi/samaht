@@ -11,6 +11,7 @@ import Link from "next/link";
 import ChangeLanguage from "../Ui/ChangeLanguage"; 
 import useWishlistStore from "@/src/store/WishlistStore";
 import { useTranslations } from "next-intl";
+import NavbarMobile from "./NavbarMobile";
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -105,6 +106,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <h3 className="text-gray-500 mb-2">{t("language")}</h3>
               <ChangeLanguage />
             </div>
+<NavbarMobile onClose={onClose} />
 
             {/* المفضلة */}
             <Link

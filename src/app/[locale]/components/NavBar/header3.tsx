@@ -2,7 +2,7 @@
 import React from 'react'
 import AllCategoryList from '../Ui/AllCategoryList'
 
-import LinkList from './LinkList'
+import NavbarDesktop from './NavbarDesktop'
 
 
 export default function header3() {
@@ -11,7 +11,7 @@ export default function header3() {
 
       <div className='w-[95%]  m-auto flex  items-center justify-between '>
        
-      <LinkList/>
+      <NavbarDesktop/>
       <AllCategoryList  />
       </div>
     </div>

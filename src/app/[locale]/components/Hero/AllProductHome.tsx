@@ -27,8 +27,8 @@ export default function Page() {
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   return (
-    <div className="w-[90%] m-auto">
-      <h1 className="text-left text-2xl font-bold my-5 text-yellow-400">Product Page</h1>
+    <div className=" m-auto">
+      <h1 className="text-left text-2xl font-bold my-5 mx-7 text-yellow-400">Product Page</h1>
 
       {/* حالة التحميل */}
       {loading && <p className="text-center my-5">Loading products...</p>}
@@ -39,7 +39,7 @@ export default function Page() {
       {/* عرض المنتجات بعد الفلترة */}
       {!loading && !error && (
         <>
-          <div className="flex gap-2 lg:gap-3 flex-wrap m-auto justify-center">
+          <div className="flex gap-2 lg:gap-3 flex-wrap m-auto  justify-around ">
             {currentProducts.length > 0 ? (
               currentProducts.map(product => (
                 <Producitem key={product.id} product={product} />
