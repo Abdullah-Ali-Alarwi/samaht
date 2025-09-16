@@ -21,7 +21,7 @@ export default function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
 
-  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalPrice = cart.reduce((acc, item) => acc + (item.price || 0) * item.quantity, 0);
 
   const handlePayment = () => {
     if (!firstName || !lastName || !email || !address || !phone) {
@@ -42,7 +42,7 @@ export default function CheckoutPage() {
         id: item.id.toString(),
         title: item.title,
         quantity: item.quantity,
-        price: item.price,
+        price: item.price || 0,
         thumbnail: item.thumbnail,
       })),
       total: totalPrice,
@@ -148,13 +148,17 @@ export default function CheckoutPage() {
                     <Image src={item.thumbnail} alt={item.title} width={50} height={50} />
                   </td>
                   <td className="border p-2">{item.title}</td>
-                  <td className="border p-2">${item.price.toFixed(2)}</td>
+                  <td className="border p-2">
+                    ${typeof item.price === "number" ? item.price.toFixed(2) : "0.00"}
+                  </td>
                   <td className="border p-2 flex justify-center items-center gap-2">
                     <button className="bg-gray-200 px-2 rounded" onClick={() => decreaseQuantity(item.id)}>-</button>
                     <span>{item.quantity}</span>
                     <button className="bg-gray-200 px-2 rounded" onClick={() => increaseQuantity(item.id)}>+</button>
                   </td>
-                  <td className="border p-2">${(item.price * item.quantity).toFixed(2)}</td>
+                  <td className="border p-2">
+                    ${((item.price || 0) * item.quantity).toFixed(2)}
+                  </td>
                   <td className="border p-2">
                     <button className="bg-red-500 text-white px-2 rounded" onClick={() => removeFromCart(item.id)}>x</button>
                   </td>
@@ -172,7 +176,7 @@ export default function CheckoutPage() {
                 <Image src={item.thumbnail} alt={item.title} width={50} height={50} />
                 <div className="flex flex-col">
                   <span className="font-semibold">{item.title}</span>
-                  <span>${item.price.toFixed(2)}</span>
+                  <span>${typeof item.price === "number" ? item.price.toFixed(2) : "0.00"}</span>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-2">
@@ -194,7 +198,7 @@ export default function CheckoutPage() {
         {cart.map((item) => (
           <div key={item.id} className="flex justify-between">
             <span>{item.title} x {item.quantity}</span>
-            <span>${(item.price * item.quantity).toFixed(2)}</span>
+            <span>${((item.price || 0) * item.quantity).toFixed(2)}</span>
           </div>
         ))}
         <div className="flex justify-between font-bold mt-2 border-t border-gray-300 pt-2">

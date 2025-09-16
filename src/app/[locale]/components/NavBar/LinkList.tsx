@@ -81,7 +81,7 @@ export default function Navbar() {
 
       {/* Side Menu للموبايل */}
       <div
-        className={`fixed mt-[140px] top-0 ${isRTL ? "right-0" : "left-0"} h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+        className={`fixed mt-0 top-0 bg-amber-200 ${isRTL ? "right-0" : "left-0"} h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
           open ? "translate-x-0" : isRTL ? "translate-x-full" : "-translate-x-full"
         }`}
       >

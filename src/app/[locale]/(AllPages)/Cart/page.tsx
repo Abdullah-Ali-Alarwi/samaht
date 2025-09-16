@@ -23,7 +23,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="w-[90%] m-auto mt-5 flex flex-col lg:flex-row gap-6">
+    <div className="w-[90%] mt-[200px] m-auto  flex flex-col lg:flex-row gap-6">
       {/* جدول المنتجات على الشاشات الكبيرة */}
       <div className="flex-1 hidden lg:block">
         <h1 className="text-2xl font-bold mb-4">

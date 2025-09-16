@@ -25,10 +25,14 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
 
   const [direction, setDirection] = useState<"rtl" | "ltr">("ltr");
 
-  // ضبط اتجاه النص حسب اللغة
+  // ضبط اتجاه النص والقائمة حسب اللغة
   useEffect(() => {
     const lang = localStorage.getItem("locale") || "en";
-    setDirection(lang === "ar" ? "rtl" : "ltr");
+    if (lang === "ar") {
+      setDirection("rtl");
+    } else {
+      setDirection("ltr");
+    }
   }, []);
 
   const handleSignIn = () => {
@@ -42,7 +46,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
   };
 
   return (
-    <div  className=" ">
+    <div>
       {/* Overlay خلف القائمة */}
       <div
         className={`fixed inset-0 bg-black/80 z-40 transition-opacity duration-300 ${
@@ -53,9 +57,15 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
 
       {/* القائمة الجانبية */}
       <div
-        dir={direction}
-        className={`fixed  top-0 h-[80%] w-64 z-102  bg-white shadow-lg  transform transition-transform duration-300 flex flex-col justify-between ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        dir={direction} // هنا يتم تحديد اتجاه النص
+        className={`fixed top-0 h-screen w-64 z-50 bg-white shadow-lg transform transition-transform duration-300 flex flex-col justify-between ${
+          isOpen
+            ? direction === "rtl"
+              ? "translate-x-0 right-0"
+              : "translate-x-0 left-0"
+            : direction === "rtl"
+            ? "-translate-x-full right-0"
+            : "-translate-x-full left-0"
         }`}
       >
         <div>
@@ -137,21 +147,20 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               </>
             )}
           </nav>
-             {/* زر تسجيل الخروج أسفل القائمة إذا كان مسجّل دخول */}
-        {session?.user && (
-          <div className="p-4 border-t border-gray-200">
-            <button
-              onClick={handleSignOut}
-              className="flex items-center gap-2 w-full justify-center text-lg text-red-600 hover:text-red-800"
-            >
-              <BiLogOut />
-              {t("signOut")}
-            </button>
-          </div>
-        )}
-        </div>
 
-   
+          {/* زر تسجيل الخروج أسفل القائمة إذا كان مسجّل دخول */}
+          {session?.user && (
+            <div className="p-4 border-t border-gray-200">
+              <button
+                onClick={handleSignOut}
+                className="flex items-center gap-2 w-full justify-center text-lg text-red-600 hover:text-red-800"
+              >
+                <BiLogOut />
+                {t("signOut")}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

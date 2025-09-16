@@ -24,7 +24,7 @@ export default function ForgetPasswordPage() {
   };
 
   return (
-    <div className="w-screen min-h-screen flex justify-center items-center bg-amber-700/5 p-4">
+    <div className="w-full mt-[200px] lg:mt-[170px] min-h-screen flex justify-center items-center bg-amber-700/5 p-4">
       <div className="bg-white w-full sm:w-[90%] max-w-md p-8 flex flex-col items-center rounded-lg shadow-md">
         <h2 className="text-3xl font-bold mb-4 text-center">نسيت كلمة المرور</h2>
         <Image
