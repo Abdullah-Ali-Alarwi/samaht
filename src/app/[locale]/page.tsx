@@ -3,6 +3,7 @@ import MainHero from '@/src/app/[locale]/components/MainHero';
 import AllProductHome from '@/src/app/[locale]/components/Hero/AllProductHome';
 import useProductStore from '@/src/store/ProductsStore';
 import { useEffect } from "react";
+import UsersOpinions from './components/Ui/UsersOpenions';
 
 export default function HomePage() {
   const { products, fetchProducts } = useProductStore();
@@ -15,9 +16,10 @@ export default function HomePage() {
 
   return (
     <div>
-      <MainHero />
+      <MainHero  />
     
       <AllProductHome />
+      <UsersOpinions />
      
     </div>
   );

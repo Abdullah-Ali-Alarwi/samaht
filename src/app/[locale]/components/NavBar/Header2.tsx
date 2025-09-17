@@ -143,6 +143,7 @@ export default function Header2() {
           </button>
         </div>
       </div>
+      
 
       {/* Mobile Search */}
       <div className="lg:hidden m-2 flex w-full">

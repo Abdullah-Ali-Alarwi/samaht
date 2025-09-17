@@ -39,7 +39,7 @@ export default function Page() {
       {/* عرض المنتجات بعد الفلترة */}
       {!loading && !error && (
         <>
-          <div className="flex gap-2 lg:gap-3 flex-wrap m-auto  justify-around ">
+          <div className="flex lg:gap-3 flex-wrap m-auto  lg:mx-7 justify-around ">
             {currentProducts.length > 0 ? (
               currentProducts.map(product => (
                 <Producitem key={product.id} product={product} />
