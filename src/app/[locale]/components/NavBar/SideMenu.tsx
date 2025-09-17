@@ -73,7 +73,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
           {/* زر إغلاق */}
           <div className="flex justify-end p-4">
             <button onClick={onClose}>
-              <FaTimes className="text-2xl" />
+              <FaTimes className="text-2xl text-gray-700 hover:text-red-500" />
             </button>
           </div>
 
