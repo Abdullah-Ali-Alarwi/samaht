@@ -54,12 +54,12 @@ export default function UsersOpinions() {
   ]);
 
   return (
-    <div className="w-[] !overflow-hidden " >
+    <div className=" !overflow-hidden " >
       <h1 className="text-right  text-2xl font-bold my-10 mx-7 text-yellow-400">
         آراء المستخدمين
       </h1>
 
-      <div className="flex justify-center items-center w-[70%]  mt-10 lg:w-[70%]  mx-auto ">
+      <div className="flex justify-center items-center w-[100%]  mt-10 lg:w-[70%]  mx-auto ">
         <div className="relative w-[90%] lg:w-[50%] max-w-4xl px-4 mt-12 mx-auto ">
           <Swiper
             effect={"cards"}

@@ -13,7 +13,7 @@ export default function Page() {
   const filteredProducts = getFilteredProducts();
 
   return (
-    <div className="w-[90%] m-auto mt-[200px]">
+    <div className="w-full lg:w-[90%] m-auto mt-[200px]">
       <h1 className="text-left text-2xl font-bold my-5 text-yellow-400">Product Page</h1>
 
       {/* حالة التحميل */}
